@@ -225,10 +225,9 @@
         .btn-download:hover { background: #fff; color: #000; border-color: #fff; box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4); transform: translateY(-3px); }
 
         /* 5. Top Header */
-        .top-nav { display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; padding: 60px 60px; margin-bottom: 40px; }
-        .top-nav-left { display: flex; flex-direction: column; gap: 10px; }
-        .top-nav h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 900; letter-spacing: -2px; color: #fff; margin: 0; line-height: 1; text-transform: uppercase; }
-        .typewriter-container { font-size: 2rem; color: var(--accent-cyan); font-family: var(--font-primary); font-weight: 600; min-height: 2.5rem; margin-top: 5px; }
+        .name-card { display: flex; flex-direction: column; justify-content: center; padding: 60px 80px; min-height: 320px; }
+        .name-card h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 900; letter-spacing: -2px; color: #fff; margin: 0; line-height: 1; text-transform: uppercase; }
+        .typewriter-container { font-size: 1.8rem; color: var(--accent-cyan); font-family: var(--font-primary); font-weight: 600; min-height: 2.5rem; margin-top: 10px; }
         .top-nav .nav-badge { color: var(--accent-cyan); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; background: rgba(0, 242, 254, 0.1); padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(0, 242, 254, 0.2); }
         .typing-cursor { display: inline-block; width: 3px; height: 1em; background-color: var(--accent-cyan); margin-left: 5px; animation: blink 1s infinite; vertical-align: text-bottom; }
         @keyframes blink { 50% { opacity: 0; } }
@@ -277,12 +276,15 @@
     <div class="container">
         
         <!-- TOP NAVIGATION BOX -->
-        <header class="bento-card top-nav">
-            <div class="top-nav-left">
+        <header class="bento-grid" style="margin-bottom: 40px; grid-auto-rows: auto;">
+            <div class="bento-card col-span-3 name-card">
                 <h1>DIPENDRA SAH</h1>
                 <div class="typewriter-container">
                     <span id="typewriter"></span>
                 </div>
+            </div>
+            <div class="bento-card col-span-1 image-card" style="padding: 0;">
+                <img src="diipuu.jpeg" alt="Dipendra Sah" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
         </header>
         
@@ -290,14 +292,13 @@
         <section>
             <div class="bento-grid">
                 <!-- Intro Card -->
-                <div class="bento-card col-span-2 row-span-2 intro-card">
+                <div class="bento-card col-span-3 row-span-2 intro-card">
                     <h2>About Me</h2>
-                    <p>I design and build intelligent systems, leveraging data science, machine learning, and clean code to solve complex real-world problems. Welcome to my digital space.</p>
-                </div>
+                    <p>  I design and build intelligent systems using **Artificial Intelligence, Machine Learning, and Data Science** to solve real-world problems. I enjoy transforming ideas and data into practical, scalable solutions through clean code, creative thinking, and continuous learning.
+With a strong interest in **AI/ML, software development, and problem-solving**, I’m constantly exploring new technologies and building projects that challenge me to think differently.
+Welcome to my digital space — where **ideas become intelligent solutions.**
 
-                <!-- Profile Image -->
-                <div class="bento-card col-span-1 row-span-2 image-card">
-                    <img src="diipuu.jpeg" alt="Dipendra Sah">
+</p>
                 </div>
 
                 <!-- Status Card -->
