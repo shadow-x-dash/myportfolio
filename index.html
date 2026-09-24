@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dipendra Sah - AI/ML Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           Premium Bento Box - LONG SCROLLING Theme
+           ========================================================================== */
+        
+        :root {
+            --bg-color: #070709; 
+            --card-bg: #111114;
+            --card-border: rgba(255, 255, 255, 0.04);
+            --text-main: #ffffff;
+            --text-muted: #8a8a93;
+            --accent-cyan: #00f2fe;
+            --accent-blue: #4facfe;
+            --font-primary: 'Outfit', sans-serif;
+            --font-heading: 'Space Grotesk', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-primary);
+            padding: 80px 20px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 10%, rgba(0, 242, 254, 0.03), transparent 25%),
+                radial-gradient(circle at 85% 40%, rgba(79, 172, 254, 0.03), transparent 25%),
+                radial-gradient(circle at 50% 90%, rgba(0, 242, 254, 0.02), transparent 30%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+
+
+        section {
+            margin-bottom: 100px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            margin-bottom: 35px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .section-title::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: linear-gradient(to right, rgba(255,255,255,0.1), transparent);
+        }
+
+        /* The Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 180px;
+            gap: 20px;
+        }
+
+        /* Grid Spans */
+        .col-span-1 { grid-column: span 1; }
+        .col-span-2 { grid-column: span 2; }
+        .col-span-3 { grid-column: span 3; }
+        .col-span-4 { grid-column: span 4; }
+        .row-span-1 { grid-row: span 1; }
+        .row-span-2 { grid-row: span 2; }
+        .row-span-3 { grid-row: span 3; }
+        .row-span-4 { grid-row: span 4; }
+
+        /* The Cards */
+        .bento-card {
+            background: linear-gradient(145deg, var(--card-bg), #0c0c0e);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            padding: 35px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Interactive Hover Glow via JS */
+        .bento-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.03), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .bento-card:hover::before {
+            opacity: 1;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 242, 254, 0.15);
+        }
+
+        .bento-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        h3.card-title {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- Specific Sections --- */
+
+        /* 1. Hero Section */
+        .intro-card { justify-content: center; }
+        .intro-card h2 { font-size: 1.5rem; font-weight: 400; color: var(--text-muted); margin-bottom: 10px; }
+        .intro-card h2 { font-size: 2.2rem; font-weight: 700; font-family: var(--font-heading); margin-bottom: 15px; color: #fff; }
+        .intro-card p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; max-width: 90%; }
+
+        .image-card { padding: 0; border: none; }
+        .image-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(100%) contrast(1.1); transition: filter 0.5s ease;
+        }
+        .image-card:hover img { filter: grayscale(0%) contrast(1.05); }
+
+        .status-card { justify-content: space-between; background: linear-gradient(145deg, #111114, #080d11); }
+        .pulse-container { display: flex; align-items: center; gap: 15px; }
+        .pulse-dot { width: 12px; height: 12px; background-color: #10b981; border-radius: 50%; position: relative; }
+        .pulse-dot::after {
+            content: ""; position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px;
+            border-radius: 50%; background-color: rgba(16, 185, 129, 0.4); animation: ping 2s infinite;
+        }
+        @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
+        .status-card h4 { font-size: 1.1rem; font-weight: 500; }
+        .status-card p { color: var(--text-muted); font-size: 0.9rem; }
+
+        .socials-card { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 15px; padding: 25px; }
+        .social-btn {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 14px;
+            display: flex; justify-content: center; align-items: center; color: var(--text-main); transition: 0.3s;
+        }
+        .social-btn:hover { background: rgba(0, 242, 254, 0.1); border-color: var(--accent-cyan); color: var(--accent-cyan); transform: scale(1.05); }
+
+        /* 2. Skills Section */
+        .skill-category-card { justify-content: flex-start; }
+        .tags-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag {
+            padding: 8px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 30px; font-size: 0.95rem; color: #d4d4d8; transition: 0.3s; cursor: default;
+        }
+        .tag:hover { border-color: var(--accent-cyan); background: rgba(0, 242, 254, 0.05); color: #fff; transform: translateY(-2px); }
+
+        /* 3. Projects Section */
+        .project-card { justify-content: space-between; }
+        .project-header { margin-bottom: 20px; }
+        .project-header h4 { font-size: 1.6rem; margin-bottom: 8px; font-family: var(--font-heading); }
+        .project-header p { color: var(--text-muted); line-height: 1.6; }
+        .project-footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; }
+        .project-link {
+            display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: #fff; color: #000;
+            border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s;
+        }
+        .project-link:hover { background: var(--accent-cyan); color: #000; }
+
+        /* 4. Timeline / Education */
+        .timeline { display: flex; flex-direction: column; gap: 30px; position: relative; padding-left: 20px; margin-top: 10px; width: 100%; }
+        .timeline::before { content: ""; position: absolute; left: 0; top: 5px; bottom: 0; width: 2px; background: rgba(255, 255, 255, 0.1); }
+        .timeline-item { position: relative; }
+        .timeline-dot { position: absolute; left: -25px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent-cyan); box-shadow: 0 0 10px rgba(0, 242, 254, 0.5); }
+        .timeline-date { display: inline-block; font-size: 0.85rem; color: var(--accent-cyan); font-weight: 600; margin-bottom: 8px; background: rgba(0, 242, 254, 0.1); padding: 4px 10px; border-radius: 20px; }
+        .timeline-content h4 { font-size: 1.3rem; margin-bottom: 5px; font-family: var(--font-heading); color: #fff; }
+        .timeline-content p { color: var(--text-muted); font-size: 1rem; }
+
+        /* 6. Resume Section */
+        .resume-card { 
+            justify-content: center; align-items: center; text-align: center; gap: 20px; padding: 60px;
+            background: linear-gradient(145deg, var(--card-bg), #0c0c0e); border: 1px solid var(--card-border);
+        }
+        .resume-card h2 { font-family: var(--font-heading); font-size: 2.8rem; color: #fff; margin-bottom: 5px; }
+        .resume-actions { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+        .btn-view, .btn-download { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: 30px; font-weight: 600; font-size: 1rem; text-decoration: none; transition: 0.3s; }
+        .btn-view { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
+        .btn-view:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); transform: translateY(-3px); }
+        .btn-download { background: var(--accent-cyan); color: #000; border: 1px solid var(--accent-cyan); }
+        .btn-download:hover { background: #fff; color: #000; border-color: #fff; box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4); transform: translateY(-3px); }
+
+        /* 5. Top Header */
+        .top-nav { display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; padding: 60px 60px; margin-bottom: 40px; }
+        .top-nav-left { display: flex; flex-direction: column; gap: 10px; }
+        .top-nav h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 900; letter-spacing: -2px; color: #fff; margin: 0; line-height: 1; text-transform: uppercase; }
+        .typewriter-container { font-size: 2rem; color: var(--accent-cyan); font-family: var(--font-primary); font-weight: 600; min-height: 2.5rem; margin-top: 5px; }
+        .top-nav .nav-badge { color: var(--accent-cyan); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; background: rgba(0, 242, 254, 0.1); padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(0, 242, 254, 0.2); }
+        .typing-cursor { display: inline-block; width: 3px; height: 1em; background-color: var(--accent-cyan); margin-left: 5px; animation: blink 1s infinite; vertical-align: text-bottom; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* 7. Contact Section */
+        .contact-card { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; background: linear-gradient(145deg, var(--card-bg), #06080b); padding: 60px; align-items: center; }
+        .contact-left h2 { font-family: var(--font-heading); font-size: clamp(2.5rem, 4vw, 4rem); color: #fff; margin-bottom: 15px; line-height: 1.1; font-weight: 700; }
+        .contact-left p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 40px; max-width: 90%; }
+        .contact-info { display: flex; flex-direction: column; gap: 20px; }
+        .info-item { display: flex; align-items: center; gap: 15px; color: #fff; font-size: 1.1rem; font-weight: 500; }
+        .info-item svg { background: rgba(0,242,254,0.1); padding: 10px; border-radius: 50%; border: 1px solid rgba(0,242,254,0.2); width: 45px; height: 45px; }
+        .contact-right { background: rgba(20, 25, 35, 0.95); padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.6); position: relative; z-index: 5; }
+        .contact-form { display: flex; flex-direction: column; gap: 20px; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 18px 25px; border-radius: 12px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); color: #fff; font-family: var(--font-primary); font-size: 1rem; transition: 0.3s; }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent-cyan); background: rgba(0, 242, 254, 0.03); box-shadow: 0 0 15px rgba(0,242,254,0.1); }
+        .contact-form textarea { resize: vertical; }
+        .btn-submit { display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent-cyan); color: #000; border: none; padding: 20px; border-radius: 12px; font-weight: 800; font-size: 1.1rem; font-family: var(--font-primary); cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 5px 15px rgba(0,242,254,0.3); text-transform: uppercase; letter-spacing: 1px; }
+        .btn-submit:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0,242,254,0.5); }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .bento-grid { grid-template-columns: 1fr 1fr; }
+            .intro-card, .project-card, .edu-card { grid-column: span 2; }
+            .contact-card { grid-template-columns: 1fr; padding: 40px 30px; gap: 40px; }
+            .skill-category-card { grid-column: span 2; }
+        }
+
+        /* 8. Scroll to Top Button */
+        .scroll-top-btn { position: fixed; bottom: 30px; right: 30px; z-index: 99; width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--accent-cyan); color: #000; display: flex; justify-content: center; align-items: center; cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(20px); transition: 0.3s; box-shadow: 0 5px 15px rgba(0, 242, 254, 0.3); }
+        .scroll-top-btn.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        .scroll-top-btn:hover { background: #fff; transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 20px rgba(0, 242, 254, 0.5); }
+        .scroll-top-btn svg { width: 24px; height: 24px; }
+
+        @media (max-width: 600px) {
+            .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+            .bento-card { grid-column: span 1 !important; grid-row: span 1 !important; min-height: 200px; }
+            .intro-card h1 { font-size: 2.5rem; min-height: 3.5rem; }
+            .image-card { min-height: 350px; }
+            .socials-card { display: grid; }
+            .section-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- TOP NAVIGATION BOX -->
+        <header class="bento-card top-nav">
+            <div class="top-nav-left">
+                <h1>DIPENDRA SAH</h1>
+                <div class="typewriter-container">
+                    <span id="typewriter"></span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- SECTION 1: HERO -->
+        <section>
+            <div class="bento-grid">
+                <!-- Intro Card -->
+                <div class="bento-card col-span-2 row-span-2 intro-card">
+                    <h2>About Me</h2>
+                    <p>I design and build intelligent systems, leveraging data science, machine learning, and clean code to solve complex real-world problems. Welcome to my digital space.</p>
+                </div>
+
+                <!-- Profile Image -->
+                <div class="bento-card col-span-1 row-span-2 image-card">
+                    <img src="diipuu.jpeg" alt="Dipendra Sah">
+                </div>
+
+                <!-- Status Card -->
+                <div class="bento-card col-span-1 row-span-1 status-card">
+                    <h3 class="card-title">Availability</h3>
+                    <div class="pulse-container">
+                        <div class="pulse-dot"></div>
+                        <div>
+                            <h4>Open to Work</h4>
+                            <p>Seeking New Projects</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Socials Card -->
+                <div class="bento-card col-span-1 row-span-1 socials-card">
+                    <a href="https://github.com/shadow-x-dash" class="social-btn" title="GitHub"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                    <a href="https://www.linkedin.com/in/dipendra-sah-84b008311/" class="social-btn" title="LinkedIn"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                    <a href="https://x.com/DipendraSa99703" class="social-btn" title="X (Twitter)"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    <a href="mailto:ds9877@srmist.edu.in" class="social-btn" title="Email"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 2: TECH ARSENAL -->
+        <section>
+            <h2 class="section-title">Tech Arsenal</h2>
+            <div class="bento-grid">
+                <!-- Languages & Frameworks -->
+                <div class="bento-card col-span-2 row-span-1 skill-category-card">
+                    <h3 class="card-title">Languages & Frameworks</h3>
+                    <div class="tags-container">
+                        <span class="tag">Python</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">C</span>
+                        <span class="tag">Streamlit</span>
+                    </div>
+                </div>
+                
+                <!-- AI / ML -->
+                <div class="bento-card col-span-2 row-span-1 skill-category-card">
+                    <h3 class="card-title">Machine Learning</h3>
+                    <div class="tags-container">
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">Scikit-Learn</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">NumPy</span>
+                        <span class="tag">OpenCV</span>
+                        <span class="tag">Matplotlib</span>
+                    </div>
+                </div>
+
+                <!-- Tools & DB -->
+                <div class="bento-card col-span-4 row-span-1 skill-category-card" style="align-items: center; text-align: center;">
+                    <h3 class="card-title" style="justify-content: center;">Tools & Databases</h3>
+                    <div class="tags-container" style="justify-content: center;">
+                        <span class="tag">MySQL</span>
+                        <span class="tag">MATLAB</span>
+                        <span class="tag">Git & GitHub</span>
+                        <span class="tag">Jupyter</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PROJECTS -->
+        <section>
+            <h2 class="section-title">Featured Work</h2>
+            <div class="bento-grid">
+                
+                <!-- Project 1 -->
+                <div class="bento-card col-span-2 row-span-2 project-card">
+                    <div class="project-header">
+                        <h4>Student Performance Predictor</h4>
+                        <p>An end-to-end machine learning project utilizing multiple models (Linear Regression, Random Forest, Decision Tree) to analyze and predict student scores based on demographics and studying habits.</p>
+                    </div>
+                    <div class="project-footer">
+                        <div class="tags-container">
+                            <span class="tag">Scikit-learn</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">Seaborn</span>
+                        </div>
+                        <a href="#" class="project-link">View Details ↗</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bento-card col-span-2 row-span-2 project-card">
+                    <div class="project-header">
+                        <h4>Face Recognition System</h4>
+                        <p>A robust computer vision application capable of detecting and recognizing faces in real-time video streams using advanced HAAR cascade classifiers and LBPH algorithms.</p>
+                    </div>
+                    <div class="project-footer">
+                        <div class="tags-container">
+                            <span class="tag">OpenCV</span>
+                            <span class="tag">Python</span>
+                        </div>
+                        <a href="#" class="project-link">View Details ↗</a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bento-card col-span-4 row-span-2 project-card">
+                    <div class="project-header">
+                        <h4>Intelligent Academic Chatbot</h4>
+                        <p>A responsive natural language processing bot designed to assist university students with academic queries, utilizing deep learning techniques to understand intent and provide accurate, contextual responses.</p>
+                    </div>
+                    <div class="project-footer">
+                        <div class="tags-container">
+                            <span class="tag">NLP</span>
+                            <span class="tag">NLTK</span>
+                            <span class="tag">TensorFlow</span>
+                        </div>
+                        <a href="#" class="project-link">View Details ↗</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 4: EDUCATION -->
+        <section>
+            <h2 class="section-title">Education Journey</h2>
+            <div class="bento-grid">
+                <div class="bento-card col-span-4 row-span-2">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2021 - 2025</span>
+                                <h4>B.Tech in Artificial Intelligence & Machine Learning</h4>
+                                <p>SRM Institute of Science and Technology</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2019 - 2021</span>
+                                <h4>Higher Secondary (12th Grade)</h4>
+                                <p>Science Stream (PCM)</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2018 - 2019</span>
+                                <h4>Secondary Education (10th Grade)</h4>
+                                <p>General Academics</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: RESUME CTA -->
+        <section>
+            <div class="bento-grid">
+                <div class="bento-card col-span-4 row-span-2 resume-card">
+                    <h2>View My Full Resume</h2>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">Get a comprehensive overview of my experience, technical skills, and academic background.</p>
+                    <div class="resume-actions">
+                        <a href=" Dipendra_Sah_RA2511026050318_Resume.pdf" target="_blank" class="btn-view">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"></path></svg>
+                            View Resume
+                        </a>
+                        <a href="Dipendra_Sah_RA2511026050318_Resume.pdf" download="Dipendra_Sah_Resume.pdf" class="btn-download">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path></svg>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: CONTACT -->
+        <section>
+            <div class="bento-grid">
+                <div class="bento-card col-span-4 row-span-3 contact-card">
+                    
+                    <div class="contact-left">
+                        <h2>Let's build something <span style="color: var(--accent-cyan);">great.</span></h2>
+                        <p>I'm always open to discussing exciting AI/ML opportunities or partnership work. Reach out and let's create something extraordinary together.</p>
+                        
+                        <div class="contact-info">
+                            <div class="info-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                <span>dsah28437@gmail.com</span>
+                            </div>
+                            <div class="info-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                                <span>SRM IST,trichy, India</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-right">
+                        <form class="contact-form" action="mailto:dsah28437@gmail.com" method="POST" enctype="text/plain">
+                            <input type="text" name="Name" placeholder="Your Name" required>
+                            <input type="email" name="Email" placeholder="Your Email Address" required>
+                            <textarea name="Message" rows="5" placeholder="Your Message" required></textarea>
+                            <button type="submit" class="btn-submit">
+                                Send Message 
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="scroll-top-btn" title="Back to Top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+    </button>
+
+    <!-- Interactivity Scripts -->
+    <script>
+        // 1. Interactive Hover Glow
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // 2. Terminal Typing Animation
+        const phrases = ["AI / ML Engineer.", "Data Scientist.", "Problem Solver."];
+        let i = 0; let j = 0; let currentPhrase = [];
+        let isDeleting = false; let isEnd = false;
+        const typeTarget = document.getElementById('typewriter');
+        const cursor = document.createElement('span'); cursor.className = 'typing-cursor';
+        
+        function loop () {
+            isEnd = false;
+            typeTarget.innerHTML = currentPhrase.join('');
+            typeTarget.appendChild(cursor);
+
+            if (i < phrases.length) {
+                if (!isDeleting && j <= phrases[i].length) {
+                    currentPhrase.push(phrases[i][j]); j++;
+                    typeTarget.innerHTML = currentPhrase.join(''); typeTarget.appendChild(cursor);
+                }
+                if(isDeleting && j <= phrases[i].length) {
+                    currentPhrase.pop(phrases[i][j]); j--;
+                    typeTarget.innerHTML = currentPhrase.join(''); typeTarget.appendChild(cursor);
+                }
+                if (j == phrases[i].length) { isEnd = true; isDeleting = true; }
+                if (isDeleting && j === 0) {
+                    currentPhrase = []; isDeleting = false; i++;
+                    if (i == phrases.length) { i = 0; }
+                }
+            }
+            
+            const spedUp = Math.random() * (80 - 50) + 50;
+            const normalSpeed = Math.random() * (200 - 100) + 100;
+            const time = isEnd ? 2000 : isDeleting ? spedUp : normalSpeed;
+            setTimeout(loop, time);
+        }
+        setTimeout(loop, 500);
+
+        // 3. Scroll Reveal via Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('is-visible');
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+
+
+        // 4. Scroll to Top Button
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) { scrollTopBtn.classList.add("active"); } 
+            else { scrollTopBtn.classList.remove("active"); }
+        });
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+    </script>
+</body>
+</html>
